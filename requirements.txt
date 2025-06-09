@@ -1,0 +1,7 @@
+numpy==1.23.5
+scipy==1.13.1
+pandas==1.2.5
+matplotlib==3.9.4
+schemdraw==0.20
+networkx==3.2.1
+graphviz==0.20.1

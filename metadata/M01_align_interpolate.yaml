@@ -1,0 +1,9 @@
+module: M01_align_interpolate
+name: 對齊與插值前處理
+description: TODO: 描述 對齊與插值前處理 的詳細功能
+inputs:
+  - TODO: 輸入項目
+outputs:
+  - TODO: 輸出項目
+dependencies: []
+version_note: 初始版本（2025-06-09）

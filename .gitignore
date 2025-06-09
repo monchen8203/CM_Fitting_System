@@ -1,0 +1,9 @@
+# Ignore all files in these folders except .gitkeep
+logs/*
+!logs/.gitkeep
+
+figure/*
+!figure/.gitkeep
+
+netlist/*
+!netlist/.gitkeep

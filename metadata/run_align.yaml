@@ -1,0 +1,9 @@
+module: run_align
+name: 執行整合流程
+description: TODO: 描述 執行整合流程 的詳細功能
+inputs:
+  - TODO: 輸入項目
+outputs:
+  - TODO: 輸出項目
+dependencies: []
+version_note: 初始版本（2025-06-09）

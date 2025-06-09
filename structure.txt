@@ -1,0 +1,58 @@
+
+CM_FITTING_SYSTEM/
+|   .gitignore
+|   check_project_integrity.py
+|   README.md
+|   requirements.txt
+|   structure.txt
+|   
++---data/    			資料檔
+|       801CM.txt
+|       801NM.txt
+|       Tai_CM.txt
+|       
++---docs/
+|       CM_Function_Matrix.md	功能追蹤矩陣
+|       module_reference.md   	整合說明與建議提問
+|       
++---metadata/			每個模組的配置參數
+|       M01_align_interpolate.yaml
+|       M02_sensitivity_analysis.yaml
+|       M03_global_search.yaml
+|       M04_local_optimize.yaml
+|       M05_ngspice_runner.yaml
+|       M06_model_builder.yaml
+|       M07_plot_results.yaml
+|       M08_animate_params.yaml
+|       M09_draw_netlist.yaml
+|       run_align.yaml
+|       
++---modules/			主程式
+|       M01_align_interpolate.py
+|       M02_sensitivity_analysis.py
+|       M03_global_search.py
+|       M04_local_optimize.py
+|       M05_ngspice_runner.py
+|       M06_model_builder.py
+|       M07_plot_results.py
+|       M08_animate_params.py
+|       M09_draw_netlist.py
+|       run_align.py
+|       
++---Prompt/			AI提示詞
+|       M01_Pro_align_interpolate.md
+|       M02_Pro_sensitivity_analysis.md
+|       M03_Pro_global_search.md
+|       M04_local_optimize.md
+|       M05_ngspice_runner.md
+|       M06_model_builder.md
+|       M07_plot_results.md
+|       M08_animate_params.md
+|       M09_draw_netlist.md
++---*logs/		       	最佳化日誌
+|
+|
++---*figure/			圖型輸出
+|
+|
+\---*netlist/			電路圖
