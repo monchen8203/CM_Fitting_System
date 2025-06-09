@@ -1,0 +1,9 @@
+module: M03_global_search
+name: 全域搜尋最佳化
+description: TODO: 描述 全域搜尋最佳化 的詳細功能
+inputs:
+  - TODO: 輸入項目
+outputs:
+  - TODO: 輸出項目
+dependencies: []
+version_note: 初始版本（2025-06-09）
