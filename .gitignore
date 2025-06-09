@@ -1,4 +1,14 @@
-# Ignore all files in these folders except .gitkeep
+# 忽略 Python 編譯與暫存檔案
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+
+# 忽略 VSCode 設定
+.vscode/
+
+# 保留空資料夾結構（用 .gitkeep）
 logs/*
 !logs/.gitkeep
 
