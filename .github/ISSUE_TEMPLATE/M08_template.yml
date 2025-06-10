@@ -1,0 +1,25 @@
+---
+name: M08 - 優化動畫展示器 任務追蹤
+about: 優化動畫展示器 模組任務描述
+title: "[M08] 優化動畫展示器"
+labels: module:M08, task
+assignees: ''
+
+---
+
+## 📌 任務說明
+
+請填寫模組 M08 的任務目的與預期功能。
+
+## 📂 相關檔案
+
+- `modules/M08_m08.py`
+- `metadata/M08_m08.yaml`
+- `logs/M08.log`
+- `figure/M08_result.png`
+
+## ✅ 驗收條件
+
+- 模組可被主程式調用
+- 測試輸出與預期相符
+- 記錄必要日誌與錯誤處理

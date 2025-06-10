@@ -1,0 +1,25 @@
+---
+name: M07 - 阻抗比對與繪圖工具 任務追蹤
+about: 阻抗比對與繪圖工具 模組任務描述
+title: "[M07] 阻抗比對與繪圖工具"
+labels: module:M07, task
+assignees: ''
+
+---
+
+## 📌 任務說明
+
+請填寫模組 M07 的任務目的與預期功能。
+
+## 📂 相關檔案
+
+- `modules/M07_m07.py`
+- `metadata/M07_m07.yaml`
+- `logs/M07.log`
+- `figure/M07_result.png`
+
+## ✅ 驗收條件
+
+- 模組可被主程式調用
+- 測試輸出與預期相符
+- 記錄必要日誌與錯誤處理

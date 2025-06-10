@@ -1,0 +1,16 @@
+<<<<<<< HEAD
+# Ignore all files in these folders except .gitkeep
+logs/*
+!logs/.gitkeep
+
+figure/*
+!figure/.gitkeep
+
+netlist/*
+!netlist/.gitkeep
+=======
+__pycache__/
+logs/
+*.pyc
+.vscode/
+>>>>>>> 8946684332fb33cfc5a8b6fb41b2188a244a27c0

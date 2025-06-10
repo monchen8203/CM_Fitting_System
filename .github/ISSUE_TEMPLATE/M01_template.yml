@@ -1,0 +1,25 @@
+---
+name: M01 - 插值與頻率對齊功能 任務追蹤
+about: 插值與頻率對齊功能 模組任務描述
+title: "[M01] 插值與頻率對齊功能"
+labels: module:M01, task
+assignees: ''
+
+---
+
+## 📌 任務說明
+
+請填寫模組 M01 的任務目的與預期功能。
+
+## 📂 相關檔案
+
+- `modules/M01_m01.py`
+- `metadata/M01_m01.yaml`
+- `logs/M01.log`
+- `figure/M01_result.png`
+
+## ✅ 驗收條件
+
+- 模組可被主程式調用
+- 測試輸出與預期相符
+- 記錄必要日誌與錯誤處理

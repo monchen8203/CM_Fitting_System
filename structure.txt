@@ -55,4 +55,7 @@ CM_FITTING_SYSTEM/
 +---*figure/			圖型輸出
 |
 |
++---config			實際運行的參數
+|
+|
 \---*netlist/			電路圖

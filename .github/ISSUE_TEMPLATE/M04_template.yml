@@ -1,0 +1,25 @@
+---
+name: M04 - SLSQP 局部最佳化器 任務追蹤
+about: SLSQP 局部最佳化器 模組任務描述
+title: "[M04] SLSQP 局部最佳化器"
+labels: module:M04, task
+assignees: ''
+
+---
+
+## 📌 任務說明
+
+請填寫模組 M04 的任務目的與預期功能。
+
+## 📂 相關檔案
+
+- `modules/M04_m04.py`
+- `metadata/M04_m04.yaml`
+- `logs/M04.log`
+- `figure/M04_result.png`
+
+## ✅ 驗收條件
+
+- 模組可被主程式調用
+- 測試輸出與預期相符
+- 記錄必要日誌與錯誤處理
