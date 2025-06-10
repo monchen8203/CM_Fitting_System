@@ -1,9 +1,23 @@
 module: M01_align_interpolate
 name: 對齊與插值前處理
-description: TODO: 描述 對齊與插值前處理 的詳細功能
+description: >-
+  本模組負責讀取原始的共模(CM)與差模(NM)阻抗量測數據。透過科學計算函式庫(Scipy)進行線性插值，將不同頻率取樣點的原始數據，對齊並插值到一個標準化的對數掃描頻率軸上（1 MHz 至 3 GHz）。最終目的是使量測數據與後續的電路模擬（如 Ngspice）結果具有可比性，並將處理後的數據統一格式化輸出。
 inputs:
-  - TODO: 輸入項目
+  - name: 801CM.txt
+    type: File
+    description: 共模(CM)阻抗的原始量測數據，應存放於 'data/' 目錄下。檔案格式為兩欄文字，分別是頻率(Hz)與阻抗(Ohm)。
+  - name: 801NM.txt
+    type: File
+    description: 差模(NM)阻抗的原始量測數據，應存放於 'data/' 目錄下。檔案格式同上。
 outputs:
-  - TODO: 輸出項目
-dependencies: []
+  - name: m01_interpolated_data.csv
+    type: File
+    description: 處理完成的數據檔案，存放於 'output/' 目錄下。包含標準化的頻率軸(Frequency_Hz)以及對應的插值後阻抗(Z_CM, Z_NM)。
+  - name: m01_align_interpolate.log
+    type: File
+    description: 模組執行的詳細日誌，存放於 'logs/' 目錄下，用於追蹤與除錯。
+dependencies:
+  - numpy
+  - pandas
+  - scipy
 version_note: 初始版本（2025-06-09）

@@ -1,9 +1,20 @@
 module: M05_ngspice_runner
-name: Ngspice 子進程控制
-description: TODO: 描述 Ngspice 子進程控制 的詳細功能
+name: Ngspice 執行器
+description: >-
+  本模組作為與 Ngspice 模擬引擎的接口，透過 Python 的 `subprocess` 模組安全地呼叫 `ngspice.exe`。它以批次模式(-b)執行指定的 Netlist 檔案，並具備超時控制與完整的輸出/錯誤捕捉功能，確保自動化流程的穩定性。
 inputs:
-  - TODO: 輸入項目
+  - name: Runnable Netlist File
+    type: File
+    description: 一個可供執行的 Netlist 檔案（例如由 M06 產生），應存放於專案根目錄下的 'netlist/runnable/' 資料夾內。
+  - name: ngspice.exe
+    type: System Executable
+    description: Ngspice 的主程式執行檔。模組內的程式碼需要設定其正確的安裝路徑。
 outputs:
-  - TODO: 輸出項目
+  - name: Simulation Result (stdout, stderr)
+    type: Tuple (in code)
+    description: 函式會回傳一個包含 (stdout, stderr) 的元組。成功時 stdout 含有模擬數據，失敗時 stderr 含有錯誤訊息。
+  - name: m05_ngspice_runner.log
+    type: File
+    description: 模組執行的詳細日誌，包含執行的指令、成功訊息、錯誤與警告，存放於專案根目錄 'logs/' 下。
 dependencies: []
-version_note: 初始版本（2025-06-09）
+version_note: 初始版本（2025-06-10）

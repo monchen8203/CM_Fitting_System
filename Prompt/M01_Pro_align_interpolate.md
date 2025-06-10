@@ -1,4 +1,5 @@
-請根據模組代碼 M01（align_interpolate），撰寫一個 Python 模組，功能為讀取 801CM.txt 和 801NM.txt 兩組阻抗資料，進行對頻率軸（401 點 Decade 掃頻，1 MHz ~ 3 GHz）的插值處理，使其可與 ngspice 模擬結果比對。請輸出成統一格式的 DataFrame 或 .npy 檔案供後續模組使用。
+請根據模組代碼 M01（align_interpolate），撰寫一個 Python 模組，功能為讀取 801CM.txt 和 801NM.txt 兩組阻抗資料，進行對頻率軸（401 點 Decade 掃頻，1 MHz ~ 3 GHz）的插值處理，使其可與 ngspice 模擬結果比對。請輸出成統一格式的 DataFrame 或 .npy 檔案供後續模組使用。呼叫模組在通一個檔案夾,輸入輸出檔案在上一層的子目錄
+
 
 參考規格：
 - Python 版本：3.9.0

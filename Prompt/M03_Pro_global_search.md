@@ -1,4 +1,5 @@
-請根據模組 M03（global_search），使用 scipy.optimize.differential_evolution 幫我產生一個初步最佳化模組，輸入為頻率對齊後插值資料與 Netlist 模板，目標為將共模/差模阻抗誤差最小化。Ngspice 使用 subprocess 呼叫 CLI 模式。
+請根據模組 M03（global_search），使用 scipy.optimize.differential_evolution 幫我產生一個初步最佳化模組，輸入為頻率對齊後插值資料與 Netlist 模板，目標為將共模/差模阻抗誤差最小化。Ngspice 使用 subprocess 呼叫 CLI 模式。呼叫模組在通一個檔案夾,輸入輸出檔案在上一層的子目錄
+
 
 需符合以下條件：
 - Python 3.9 / Ngspice CLI 44.2

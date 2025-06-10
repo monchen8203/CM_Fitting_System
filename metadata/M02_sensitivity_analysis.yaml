@@ -1,9 +1,28 @@
 module: M02_sensitivity_analysis
-name: 參數敏感度分析
-description: TODO: 描述 參數敏感度分析 的詳細功能
+name: 元件參數敏感度分析
+description: >-
+  本模組旨在評估電路模型中各元件參數對最終阻抗特性的影響程度。它會自動化地對每個參數進行微小變動(+5%)，並呼叫 M06(產生Netlist) 與 M05(執行模擬) 來取得變動後的結果。最後，透過與 M01 的基準數據進行比較，計算出各參數的敏感度，並以長條圖將結果視覺化，幫助使用者快速識別關鍵元件。
 inputs:
-  - TODO: 輸入項目
+  - name: M01 Interpolated Data
+    type: File
+    description: 由 M01 模組產生的插值後數據檔案(m01_interpolated_data.csv)，作為比較的黃金基準。應存放於 'output/' 目錄下。
+  - name: Netlist Template Files
+    type: File
+    description: 共模(CM)與差模(NM)的 Netlist 範本，其中包含可供替換的參數佔位符。應存放於 'netlist/templates/' 目錄下。
+  - name: Base Parameters
+    type: Dictionary (in code)
+    description: 在程式碼中定義的一個 Python 字典，包含所有待分析元件的名稱及其基準值。
 outputs:
-  - TODO: 輸出項目
-dependencies: []
-version_note: 初始版本（2025-06-09）
+  - name: Sensitivity Analysis Charts
+    type: File
+    description: 針對共模與差模分別產生的敏感度分析長條圖(.png)，顯示各參數的影響力排序。存放於 'figure/' 目錄下。
+  - name: m02_sensitivity_analysis.log
+    type: File
+    description: 模組執行的詳細日誌，記錄每個參數的分析過程與計算出的敏感度數值。存放於 'logs/' 目錄下。
+dependencies:
+  - M05_ngspice_runner
+  - M06_netlist_generator
+  - numpy
+  - pandas
+  - matplotlib
+version_note: 初始版本（2025-06-10）
