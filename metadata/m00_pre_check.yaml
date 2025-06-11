@@ -1,0 +1,22 @@
+module: m00_pre_check
+name: 前置環境與檔案檢查
+description: >-
+  本模組作為整個自動化系統的「發射前檢查」程序，在執行任何核心功能前被呼叫。它負責驗證整個專案的工作環境是否處於一個已知的良好狀態。其檢查項目包括：
+  1. 確保所有必要的輸入檔案（目標曲線、電路樣板）都存在於指定路徑。
+  2. 驗證目標曲線檔案的資料格式（兩欄數值）與頻率範圍是否符合預期。
+  3. 驗證電路樣板檔案的基礎格式（包含 .SUBCKT 和 .ENDS）。
+  4. 檢查所有必要的輸出資料夾是否都已建立，若無則會詢問使用者是否要自動建立。
+  任何檢查失敗都會導致程式暫停並提示使用者，以避免後續模組因環境問題而出錯。
+inputs:
+  - name: (None)
+    type: System State
+    description: 本模組不接受函式參數，而是直接檢查專案資料夾結構中預先定義好的檔案與路徑。
+dependencies: []
+outputs:
+  - name: (None)
+    type: Boolean (in code) / System Exit
+    description: 如果所有檢查通過，函式會回傳 True。若有任何檢查失敗，則會印出錯誤訊息並暫停，等待使用者確認後終止程式。
+  - name: (None)
+    type: Directory
+    description: 在使用者同意下，可能會建立 'output/', 'figure/', 'results/' 等不存在的資料夾。
+version_note: 完整功能版，包含檔案存在性、格式、頻率範圍及資料夾檢查（2025-06-11）。
