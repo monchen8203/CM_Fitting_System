@@ -1,47 +1,32 @@
 module: M03_global_search
-name: 全域搜尋與參數最佳化
-description: 使用差分進化演算法 (Differential Evolution)，自動調整電路模型的參數（如 R, L, C），目標是讓 Ngspice 模擬出的阻抗曲線與 M01 模組提供的量測目標曲線之間的誤差最小化。此模組會反覆呼叫 M05 和 M06，並在最後產生最佳化結果的日誌與圖表。
+name: 全域搜尋最佳化
+description: >-
+  本模組為最佳化流程的核心部分，使用差分演化演算法 (Differential Evolution) 進行全域搜尋。其目標是在一個廣闊的多維參數空間中，尋找能使模擬阻抗曲線與量測曲線之間誤差最小化的參數組合。此模組已被修改，能夠在每次迭代時，透過回呼 (Callback) 函式，即時記錄詳細的參數與曲線歷史，為 M08 動畫模組提供數據。
 inputs:
-  - name: M01 內插後的基準資料
-    path: output/m01_interpolated_data.csv
-    description: 由 M01 產生的目標曲線，包含頻率與對應的量測阻抗值。
-  - name: 電路模型範本
-    path: netlist/templates/cm_template.cir
-    description: 定義了元件拓撲結構的 Ngspice 電路範本檔。
-
-outputs:
-  - name: M03 執行日誌
-    path: logs/m03_global_search.log
-    description: 記錄了整個最佳化過程，包含每一次找到更佳解的參數與誤差值。
-  - name: 最終結果比較圖
-    path: figure/m03_global_search_result_[mode].png
-    description: 將量測目標曲線與找到的最佳參數模擬出的曲線繪製在一起的比較圖。
-
+  - name: Parameter Bounds
+    type: Dict (in code)
+    description: 一個 Python 字典，定義了每個待優化參數的搜尋上、下限。
+  - name: Interpolated Measured Data
+    type: File
+    description: 來自 M01 模組的標準化量測數據 CSV 檔案，預期位於 'output/m01_interpolated_data.csv'。
 dependencies:
-  - type: internal_module
-    name: M05_ngspice_runner
-    description: 用於執行 Ngspice 的模擬。
-  - type: internal_module
-    name: M06_netlist_generator
-    description: 用於根據參數產生可執行的 Netlist 檔案。
-  - type: external_library
-    name: numpy
-    description: 用於數值計算，特別是誤差計算。
-  - type: external_library
-    name: pandas
-    description: 用於讀取基準資料與處理數據。
-  - type: external_library
-    name: matplotlib
-    description: 用於繪製最終的結果比較圖。
-  - type: external_library
-    name: scipy
-    description: 提供核心的最佳化演算法 differential_evolution。
-  - type: external_software
-    name: ngspice.exe
-    description: 電路模擬器。
-
-version_note: |
-  - 初始版本（2025-06-11）
-  - 新增了日誌紀錄與差分進化演算法框架。
-  - 修復了 Ngspice 輸出解析的系列問題。
-  - 新增了智慧型中文字型處理，並最終採用自帶字型方案以解決繪圖亂碼問題。
+  - M01_align_interpolate
+  - M05_ngspice_runner
+  - M06_netlist_generator
+  - M07_plot_results (使用其解析器)
+outputs:
+  - name: Best Parameters
+    type: Dict (in code)
+    description: 函式回傳的最佳化後的參數字典。
+  - name: Parameter History
+    type: File
+    description: >-
+      包含每次迭代的序號、誤差(error)與所有參數值的 CSV 檔案。檔案會以時間戳命名 (如 'history_params_20250611-180000.csv') 並儲存於 'results/' 目錄下。
+  - name: Curve History
+    type: File
+    description: >-
+      一個 NumPy 壓縮檔 (.npz)，儲存了每次迭代所對應的完整模擬曲線數據 (頻率, 實部, 虛部)。檔案名稱與對應的參數歷史檔一致，同樣儲存於 'results/' 目錄下。
+  - name: m03_global_search.log
+    type: File
+    description: 模組執行的詳細日誌，存放於 'logs/' 目錄下。
+version_note: 已整合雙檔案歷史紀錄的回呼功能（2025-06-11）。

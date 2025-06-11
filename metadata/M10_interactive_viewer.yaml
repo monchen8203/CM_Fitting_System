@@ -1,0 +1,19 @@
+module: m10_interactive_viewer
+name: 互動式圖片檢視器
+description: >-
+  本模組提供了一個穩定的互動式圖片顯示功能。它能在一個獨立的子程序 (sub-process) 中開啟並顯示指定的圖片檔案，主程式會暫停執行，直到使用者手動關閉圖片視窗為止。此設計旨在解決 Matplotlib 在同一個程式中多次開啟互動視窗可能導致的後端衝突或不穩定問題，為整個自動化流程提供可靠的「手動確認」節點。
+inputs:
+  - name: Image Filename
+    type: String (in code)
+    description: 要顯示的圖片檔案名稱，例如 'M09_Schematic.png'。模組會自動在 'figure/' 目錄下尋找此檔案。
+dependencies:
+  - M07_plot_results (邏輯上)
+  - M09_draw_netlist (邏輯上)
+outputs:
+  - name: (None)
+    type: Screen Display
+    description: 在螢幕上彈出一個顯示圖片的視窗。本模組不產生任何檔案輸出。
+  - name: m10_interactive_viewer.log
+    type: File
+    description: 模組執行的詳細日誌，存放於 'logs/' 目錄下。
+version_note: 初始版本，使用 multiprocessing 實現穩定的互動式顯示（2025-06-11）。

@@ -1,9 +1,18 @@
 module: M09_draw_netlist
-name: 繪製 Netlist 原理圖
-description: TODO: 描述 繪製 Netlist 原理圖 的詳細功能
+name: 原理圖繪製 (Schemdraw)
+description: >-
+  本模組負責將 SPICE Netlist 檔案視覺化。它會解析一個已經填入最終參數值的 Netlist，並使用 Schemdraw 函式庫，依照一個為此專案客製化的佈局樣板，繪製出對應的電路原理圖。此版本採用非互動式繪圖後端 (matplotlib 'Agg')，以確保在不同電腦環境下的執行穩定性，專注於將結果儲存為檔案。
 inputs:
-  - TODO: 輸入項目
+  - name: Final Netlist File
+    type: File
+    description: 一個已填入最終擬合參數的 Netlist 檔案，例如由 M06 產生，預期位於 'netlist/runnable/' 目錄下。
+dependencies:
+  - M06_netlist_generator (邏輯上)
 outputs:
-  - TODO: 輸出項目
-dependencies: []
-version_note: 初始版本（2025-06-09）
+  - name: Schematic Diagram
+    type: File
+    description: 繪製完成的電路原理圖，為帶有白色背景的 PNG 格式，儲存於 'figure/' 目錄下。
+  - name: m09_draw_netlist.log
+    type: File
+    description: 模組執行的詳細日誌，存放於 'logs/' 目錄下。
+version_note: 使用 Schemdraw 手動佈局，並採用非互動後端以確保穩定性的最終功能版（2025-06-11）。

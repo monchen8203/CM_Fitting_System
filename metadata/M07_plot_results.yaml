@@ -1,9 +1,28 @@
 module: M07_plot_results
-name: 繪製模擬與量測結果
-description: TODO: 描述 繪製模擬與量測結果 的詳細功能
+name: 繪圖與誤差分析
+description: >-
+  本模組作為數據可視化的最終環節。它負責整合 M01 的量測數據與 M05 的模擬結果，生成直觀的比較圖表。主要功能包括：
+  1. 繪製「阻抗大小比較圖」，在對數座標(log-log)下比較量測值與模擬值的差異。
+  2. 繪製「擬合誤差圖」，以分貝(dB)為單位顯示模擬值與量測值的相對誤差。
+  3. 計算並回傳一個量化的擬合優劣指標(Log-Mag RMSE)。
 inputs:
-  - TODO: 輸入項目
+  - name: Simulated Data (stdout)
+    type: String (in code)
+    description: 來自 M05 模組的 Ngspice 原始 stdout 文字輸出，其中包含模擬的頻率、阻抗實部與虛部。
+  - name: Interpolated Measured Data
+    type: File
+    description: 來自 M01 模組的標準化量測數據，為一個 CSV 檔案，應存放於 'output/' 目錄下 (例如 'm01_interpolated_data.csv')。
 outputs:
-  - TODO: 輸出項目
-dependencies: []
-version_note: 初始版本（2025-06-09）
+  - name: Impedance Comparison Plot
+    type: File
+    description: 一張包含「阻抗大小比較圖」與「擬合誤差圖(dB)」的 PNG 圖片，儲存於專案根目錄的 'figure/' 資料夾下。
+  - name: Log-Magnitude RMSE
+    type: Float (in code)
+    description: 函式回傳的浮點數，代表量測與模擬數據在對數尺度下的均方根誤差(RMSE)，可用於量化評估擬合優劣。
+  - name: m07_plot_results.log
+    type: File
+    description: 模組執行的詳細日誌，存放於 'logs/' 目錄下。
+dependencies:
+  - M01_align_interpolate
+  - M05_ngspice_runner
+version_note: 初始版本（2025-06-11）

@@ -1,9 +1,32 @@
 module: M04_local_optimize
-name: 區域微調最佳化
-description: TODO: 描述 區域微調最佳化 的詳細功能
+name: 局部精化最佳化
+description: >-
+  本模組作為最佳化流程的第二階段，負責對 M03 全域搜尋找到的解進行精細微調。它採用 SLSQP (Sequential Least Squares Programming) 演算法，這是一種高效的局部優化方法。此模組的一大特色是採用「對數尺度最佳化」，即對參數的 log10 值進行優化，這極大地提高了處理跨數量級參數時的穩定性與收斂性。與 M03 同樣，此模組也已整合回呼 (Callback) 功能，能產生與 M03 格式完全一致的雙檔案歷史紀錄。
 inputs:
-  - TODO: 輸入項目
+  - name: Initial Guess
+    type: Dict (in code)
+    description: 字典格式的參數初始猜測值，通常由 M03 模組的輸出結果提供。
+  - name: Interpolated Measured Data
+    type: File
+    description: 來自 M01 模組的標準化量測數據 CSV 檔案，預期位於 'output/m01_interpolated_data.csv'。
+dependencies:
+  - M01_align_interpolate
+  - M03_global_search (邏輯上)
+  - M05_ngspice_runner
+  - M06_netlist_generator
 outputs:
-  - TODO: 輸出項目
-dependencies: []
-version_note: 初始版本（2025-06-09）
+  - name: Best Parameters
+    type: Dict (in code)
+    description: 函式回傳的最終精化後的參數字典。
+  - name: Parameter History
+    type: File
+    description: >-
+      包含每次迭代的序號、誤差(error)與所有參數值的 CSV 檔案。檔案會以時間戳命名 (如 'history_params_local_....csv') 並儲存於 'results/' 目錄下。
+  - name: Curve History
+    type: File
+    description: >-
+      一個 NumPy 壓縮檔 (.npz)，儲存了每次迭代所對應的完整模擬曲線數據。檔案名稱與對應的參數歷史檔一致，同樣儲存於 'results/' 目錄下。
+  - name: m04_local_optimize.log
+    type: File
+    description: 模組執行的詳細日誌，存放於 'logs/' 目錄下。
+version_note: 已實現對數尺度最佳化，並整合雙檔案歷史紀錄的回呼功能（2025-06-11）。

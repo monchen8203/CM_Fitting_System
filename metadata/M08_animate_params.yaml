@@ -1,9 +1,26 @@
 module: M08_animate_params
-name: 參數調整動畫視覺化
-description: TODO: 描述 參數調整動畫視覺化 的詳細功能
+name: 最佳化過程動畫
+description: >-
+  本模組是專案成果的可視化核心。它負責讀取 M03 (全域搜尋) 或 M04 (局部優化) 所產生的雙檔案歷史紀錄，使用 Matplotlib 的 FuncAnimation 技術，生成一個儀表板式的動畫。該動畫能夠動態展示模擬曲線如何逼近量測曲線、誤差如何收斂，以及所有參數如何隨迭代變化的完整過程，最終輸出一份 GIF 動畫檔案。
 inputs:
-  - TODO: 輸入項目
+  - name: Parameter History
+    type: File
+    description: 由 M03/M04 產生的 CSV 檔案，包含每次迭代的序號、誤差與所有參數值，預期位於 'results/' 目錄下。
+  - name: Curve History
+    type: File
+    description: 由 M03/M04 產生的 NPZ 檔案，包含每次迭代的完整模擬曲線數據，預期位於 'results/' 目錄下。
+  - name: Interpolated Measured Data
+    type: File
+    description: 來自 M01 模組的標準化量測數據 CSV 檔案，作為動畫中的比較基準，預期位於 'output/m01_interpolated_data.csv'。
+dependencies:
+  - M01_align_interpolate
+  - M03_global_search (邏輯上)
+  - M04_local_optimize (邏輯上)
 outputs:
-  - TODO: 輸出項目
-dependencies: []
-version_note: 初始版本（2025-06-09）
+  - name: Optimization Animation
+    type: File
+    description: 最終輸出的 GIF 動畫檔案，展示了整個最佳化過程，儲存於 'figure/' 目錄下。
+  - name: m08_animate_params.log
+    type: File
+    description: 模組執行的詳細日誌，存放於 'logs/' 目錄下。
+version_note: 初始版本，可生成儀表板式 GIF 動畫（2025-06-11）。
